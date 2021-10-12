@@ -12,10 +12,113 @@
     <!--Estilos locales-->
     <link href="css/estilos.css" rel="stylesheet">
 
+    <!--Iconos de google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons%7CMaterial+Icons+Outlined%7CMaterial+Icons+Two+Tone%7CMaterial+Icons+Round%7CMaterial+Icons+Sharp" rel="stylesheet">
+
     <title>Certamen 2</title>
 </head>
-<body>
-    
+<body class="m-5">
+        <div class="container-fluid">
+            <div class= "row">
+                <div id="perfil" class="col-4 border-end">
+                    <div class="container-fluid">
+                        <div class= "row d-flex flex-wrap w-100">
+                            <div class="col-6" id="foto-perfil">
+                                <span class="material-icons-outlined border border-dark" >account_circle</span>
+                            </div>
+                            <div class="col" id="informacion-perfil">
+                                <!--Contenidos en TS-->
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="mt-5">Ultimos signos vitales</h4>
+                    <div id="antecedentes-perfil">
+                        <!--Contenidos en TS-->
+                    </div>
+
+                    
+                </div>
+                <div id="contenido" class="col-8 border-start">
+
+
+
+
+
+                    <form id="formulario" class="container" style="display: none;">
+                        <h1>Informacion</h1>
+                        <div class="row row-cols-1">
+                            
+                            <label for="nombreCompleto" class="form-label mt-3">Nombre completo*</label>
+                            <input type="text" class="form-control" id="nombreCompleto" placeholder="Su nombre completo" required>
+                        
+                            <label for="edad" class="form-label mt-3">Edad</label>
+                            <input type="number" class="form-control" id="edad" placeholder="Su edad" required>
+                            
+                            <label for="generos" class="form-label mt-3">Genero</label>
+                            <select class="form-select" aria-label="Escoger un genero" id="generos">
+                                <option value="1">Ninguno</option>
+                                <option value="2">Hombre</option>
+                                <option value="3">Mujer</option>
+                            </select>
+
+                            <label for="nacimiento" class="form-label mt-3">Fecha de nacimiento</label>
+                            <input type="date">
+
+                            <label for="correo" class="form-label mt-3">Correos</label>
+                            <input type="text" class="form-control" id="correo" placeholder="Su correo electronico">
+
+                            <label for="numeroTel" class="form-label mt-3">Numero telefonico</label>
+                            <input type="text" class="form-control" id="numeroTel" placeholder="Su numero telefonico">
+
+                            <label for="rut" class="form-label mt-3">Rut</label>
+                            <input type="text" class="form-control" id="rut" placeholder="Su rut">
+
+                            <label for="regiones" class="form-label mt-3">Region</label>
+                            <select class="form-select" aria-label="Escoger una region" id="regiones">
+                                <option value="valparaiso">Valparaiso</option>
+                                <option value="santiago">Santiago</option>
+                            </select>
+
+
+                            <label for="comunas" class="form-label mt-3">Comunas</label>
+                            <select class="form-select" aria-label="Escoger una comuna" id="comunas">
+                                <option value="viña del mar">Viña del mar</option>
+                                <option value="valparaiso">Valparaiso</option>
+                            </select>
+                            
+                        </div>
+                    </form>
+
+                    <div class="d-flex flex-wrap align-items-center mt-5">
+                        <h3>Antecedentes clinicos</h3>
+                        <button type="button" class="btn " id="button-add-antecedentes"><i class='shape32'></i></button>
+                    </div>
+                    
+                    <div id="antecedentes-clinicos-mostrar" class="mt-5">
+                        <div class="row row-cols-2 ms-5" id="row-clinicos-mostrar">
+                            
+                            <!--Contenido TS-->
+                            
+                        </div>
+                    </div>
+                    <div id="antecedentes-clinicos-editar" class="mt-5" style="display: none;">
+                        
+                        <form id="antecedentes-form" class="d-flex align-items-start flex-column bd-highlight border">
+                            <input type="number" class="mt-5 ms-5" id="motivo" placeholder="Motivo hospitalizacion">
+                            <input type="date" class="mt-5 ms-5" id="fecha-hospitalizacion">
+                            <button type="button" class="btn btn-success m-5" id="agregarAntecedentes">Crear</button>
+                        </form>
+                    </div>
+
+                 
+                    
+                                        
+
+
+                </div>
+
+            </div>
+        </div>
 
 
     <script data-main="./js/index.js" src="./js/require-jquery.js"></script>
