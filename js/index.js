@@ -119,7 +119,6 @@ $("#enviarFormulario").on('click', function (event) {
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
             form.addEventListener('submit', function (event) {
-                console.log("");
                 if (!form.checkValidity()) {
                     if (nombreCompleto.value == "") {
                         campos.children[0].getElementsByClassName("invalid-feedback")[0].innerHTML = "Campo requerido";
