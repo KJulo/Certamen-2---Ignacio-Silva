@@ -39,10 +39,11 @@
     height:30px;
     border-radius:100%;
     background:rgba(0,0,0,0);
-    box-sizing:content-box;
+    box-sizing:content-box
 }
 
-.shape51:before{position:absolute;
+.shape51:before{
+    position:absolute;
     content:'';
     margin:auto;
     width:calc(30px/3.5);
@@ -53,10 +54,11 @@
     border-top:none;
     top:0;
     bottom:0;
-    left:0;
-    right:calc(30px/8);
-    transform:rotate(-135deg);
-    box-sizing:content-box}
+    left:calc(30px/8);
+    right:0;
+    transform:rotate(45deg);
+    box-sizing:content-box
+}
 
 
 li{

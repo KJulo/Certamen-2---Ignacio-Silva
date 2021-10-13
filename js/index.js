@@ -42,23 +42,30 @@ $(function () {
     $("#contenidos-antecedentes2").append("<li class=\"me-4 col-3\">Frecuencia Cardiaca</li>");
     $("#contenidos-antecedentes2").append("<li class=\"me-4 col-3\">" + persona.frecuenciaCardiaca + "</li>");
     for (var indice in antecedentes) {
-        $("#row-clinicos-mostrar").append("<p class=\"col-9\" id=\"p-top" + indice + "\">" + antecedentes[indice].motivo + "</p>");
-        $("#row-clinicos-mostrar").append("<button type=\"button\" class=\"btn col-3\" id=\"" + indice + "\"><span class=\"material-icons-outlined\">delete</span>");
-        $("#row-clinicos-mostrar").append("<p class=\"border-bottom border-dark col-9\">" + antecedentes[indice].fecha + "</p>");
+        $("#row-clinicos-mostrar").append("<p class=\"col-9\" id=\"p-top" + indice + "\">" + antecedentes[indice].fecha + "</p>");
+        $("#row-clinicos-mostrar").append("<button type=\"button\" class=\"btn col-3\" id=\"botonEliminar\"><span class=\"material-icons-outlined\">delete</span>");
+        $("#row-clinicos-mostrar").append("<p class=\"border-bottom border-dark col-9\">" + antecedentes[indice].motivo + "</p>");
         $("#row-clinicos-mostrar").append("<p class=\"align-self-center col-3\">Eliminar</p>");
         if (indice == "0") {
             $("#p-top0").addClass("border-top border-dark");
         }
+        $("#antecedentes-clinicos-editar-mostrar").append("<div id=\"antecedentes-editar-flex\" class=\"d-flex flex-wrap\"></div>");
+        $("#antecedentes-editar-flex").append("<div id=\"clinicos-editar-mostrar-div" + indice + "\" class=\"d-flex flex-wrap border w-75\"></div>");
+        $("#clinicos-editar-mostrar-div" + indice).append("<p class=\"w-100\">" + antecedentes[indice].motivo);
+        $("#clinicos-editar-mostrar-div" + indice).append("<p class=\"w-90 me-5\">" + antecedentes[indice].fecha);
+        $("#antecedentes-editar-flex").append("<button type=\"button\" class=\"btn w-5\" id=\"botonEliminar\">Eliminar<span class=\"material-icons-outlined\">delete</span>");
     }
 });
 $("#editarButton").on('click', function (event) {
     if ($("#formulario").attr("style") == "display: none;") {
         $("#antecedentes-clinicos-mostrar").hide();
+        $("#antecedentes-clinicos-editar-mostrar").show();
         $("#formulario").show();
     }
     else {
         $("#formulario").hide();
         $("#antecedentes-clinicos-mostrar").show();
+        $("#antecedentes-clinicos-editar-mostrar").hide();
     }
 });
 $("#regiones").on('change', function (event) {
@@ -79,4 +86,79 @@ $("#button-add-antecedentes").on('click', function (event) {
     else {
         $("#antecedentes-clinicos-editar").hide();
     }
+});
+function checkFormulario(input) {
+    return false;
+}
+function ValidarRut(valor) {
+    var tmp = valor.split('-');
+    var digito = tmp[1];
+    var rut = tmp[0];
+    if (digito == 'K')
+        digito = 'k';
+    var M = 0, S = 1;
+    for (; rut; rut = Math.floor(rut / 10))
+        S = (S + rut % 10 * (9 - M++ % 6)) % 11;
+    console.log(S ? S - 1 : 'k');
+    return S ? S - 1 : 'k';
+}
+$("#enviarFormulario").on('click', function (event) {
+    var aux;
+    var formularioFinal = true, formulario = false;
+    (function () {
+        var nombreCompleto = document.getElementById("nombrecompleto");
+        var telefono = document.getElementById("telefono");
+        var rut = document.getElementById("rut");
+        var email = document.getElementById("email");
+        telefono.maxLength = "9";
+        rut.pattern = "^[0-9]{8}-[0-9Kk]{1}$";
+        var campos = document.getElementById("campos");
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation');
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    if (nombreCompleto.value == "") {
+                        campos.children[0].getElementsByClassName("invalid-feedback")[0].innerHTML = "Campo requerido";
+                    }
+                    if (rut.value == "") {
+                        campos.children[1].getElementsByClassName("invalid-feedback")[0].innerHTML = "Campo requerido";
+                    }
+                    if (ValidarRut(rut.value) > 1) {
+                        campos.children[1].getElementsByClassName("invalid-feedback")[0].innerHTML = "Rut no válido";
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                else {
+                    form.style.display = "none";
+                    var mensaje = document.getElementById("mensaje");
+                    mensaje.style.display = "block";
+                }
+                event.preventDefault();
+                event.stopPropagation();
+                form.classList.add('was-validated');
+            }, false);
+        });
+    });
+    // $("#formulario input").each(function(){
+    //     let valor = $(this);
+    //     if (!checkFormulario($(this))){
+    //         formularioFinal=false;
+    //     }
+    //     switch (valor.attr("id")){
+    //         case "nombreCompleto":aux.nombreCompleto= valor.val();
+    //         case "edad": aux.edad = valor.val()?.toString();
+    //         case "nacimiento": aux.nacimiento = valor.val()?.toString();
+    //         case "correo": aux.correo = valor.val()?.toString();
+    //         case "numeroTel": aux.correo = valor.val()?.toString();
+    //         case "rut": aux.rut = valor.val()?.toString();
+    //     }
+    // });
+    // if (formularioFinal == true){
+    //     $("#formulario").hide();
+    //     aux = persona;
+    // }
 });

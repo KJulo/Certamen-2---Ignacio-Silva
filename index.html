@@ -39,14 +39,9 @@
                     
                 </div>
                 <div id="contenido" class="col-8 border-start">
-
-
-
-
-
-                    <form id="formulario" class="container" style="display: none;">
+                    <form id="formulario" class="container" style="display: none;" novalidate>
                         <h1>Informacion</h1>
-                        <div class="row row-cols-1">
+                        <div class="row row-cols-1" id="campos">
                             
                             <label for="nombreCompleto" class="form-label mt-3">Nombre completo*</label>
                             <input type="text" class="form-control" id="nombreCompleto" placeholder="Su nombre completo" required>
@@ -55,37 +50,38 @@
                             <input type="number" class="form-control" id="edad" placeholder="Su edad" required>
                             
                             <label for="generos" class="form-label mt-3">Genero</label>
-                            <select class="form-select" aria-label="Escoger un genero" id="generos">
+                            <select class="form-select" aria-label="Escoger un genero" id="generos" required>
                                 <option value="1">Ninguno</option>
                                 <option value="2">Hombre</option>
                                 <option value="3">Mujer</option>
                             </select>
 
                             <label for="nacimiento" class="form-label mt-3">Fecha de nacimiento</label>
-                            <input type="date">
+                            <input type="date" class="form-control" id="nacimiento" placeholder="Su ingrese" required>
 
                             <label for="correo" class="form-label mt-3">Correos</label>
-                            <input type="text" class="form-control" id="correo" placeholder="Su correo electronico">
+                            <input type="text" class="form-control" id="correo" placeholder="Su correo electronico" required>
 
                             <label for="numeroTel" class="form-label mt-3">Numero telefonico</label>
-                            <input type="text" class="form-control" id="numeroTel" placeholder="Su numero telefonico">
+                            <input type="text" class="form-control" id="numeroTel" placeholder="Su numero telefonico" required>
 
                             <label for="rut" class="form-label mt-3">Rut</label>
-                            <input type="text" class="form-control" id="rut" placeholder="Su rut">
+                            <input type="text" class="form-control" id="rut" placeholder="Su rut" required>
 
                             <label for="regiones" class="form-label mt-3">Region</label>
-                            <select class="form-select" aria-label="Escoger una region" id="regiones">
+                            <select class="form-select" aria-label="Escoger una region" id="regiones" required>
                                 <option value="valparaiso">Valparaiso</option>
                                 <option value="santiago">Santiago</option>
                             </select>
 
 
                             <label for="comunas" class="form-label mt-3">Comunas</label>
-                            <select class="form-select" aria-label="Escoger una comuna" id="comunas">
+                            <select class="form-select" aria-label="Escoger una comuna" id="comunas" required>
                                 <option value="viña del mar">Viña del mar</option>
                                 <option value="valparaiso">Valparaiso</option>
                             </select>
                             
+                            <button class="btn btn-success mt-5" id="enviarFormulario">Enviar</button>
                         </div>
                     </form>
 
@@ -96,31 +92,26 @@
                     
                     <div id="antecedentes-clinicos-mostrar" class="mt-5">
                         <div class="row row-cols-2 ms-5" id="row-clinicos-mostrar">
-                            
                             <!--Contenido TS-->
-                            
                         </div>
                     </div>
+
+                    <div id="antecedentes-clinicos-editar-mostrar" class="mt-5" style="display: none;">
+                        <!--Contenido TS-->
+                    </div>
+
+
+
                     <div id="antecedentes-clinicos-editar" class="mt-5" style="display: none;">
-                        
                         <form id="antecedentes-form" class="d-flex align-items-start flex-column bd-highlight border">
                             <input type="number" class="mt-5 ms-5" id="motivo" placeholder="Motivo hospitalizacion">
                             <input type="date" class="mt-5 ms-5" id="fecha-hospitalizacion">
                             <button type="button" class="btn btn-success m-5" id="agregarAntecedentes">Crear</button>
                         </form>
                     </div>
-
-                 
-                    
-                                        
-
-
                 </div>
-
             </div>
         </div>
-
-
     <script data-main="./js/index.js" src="./js/require-jquery.js"></script>
 </body>
 </html>
