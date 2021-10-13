@@ -32,15 +32,15 @@ $(function () {
     $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes0\" class=\"row\"></div>");
     $("#contenidos-antecedentes0").append("<i class=\"shape51 col-3\"></i>");
     $("#contenidos-antecedentes0").append("<li class=\"me-4 col-3\">Estatura</li>");
-    $("#contenidos-antecedentes0").append("<li class=\"me-4 col-3\">" + persona.estatura + "</li>");
+    $("#contenidos-antecedentes0").append("<li class=\"me-4 col-3\" id=\"estatura\">" + persona.estatura + "</li>");
     $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes1\" class=\"row\"></div>");
     $("#contenidos-antecedentes1").append("<i class=\"shape51 col-3\"></i>");
     $("#contenidos-antecedentes1").append("<li class=\"me-4 col-3\">Peso</li>");
-    $("#contenidos-antecedentes1").append("<li class=\"me-4 col-3\">" + persona.peso + "</li>");
+    $("#contenidos-antecedentes1").append("<li class=\"me-4 col-3\" id=\"peso\">" + persona.peso + "</li>");
     $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes2\" class=\"row\"></div>");
     $("#contenidos-antecedentes2").append("<i class=\"shape51 col-3\"></i>");
     $("#contenidos-antecedentes2").append("<li class=\"me-4 col-3\">Frecuencia Cardiaca</li>");
-    $("#contenidos-antecedentes2").append("<li class=\"me-4 col-3\">" + persona.frecuenciaCardiaca + "</li>");
+    $("#contenidos-antecedentes2").append("<li class=\"me-4 col-3\" id=\"frecuencia\">" + persona.frecuenciaCardiaca + "</li>");
     for (var indice in antecedentes) {
         $("#row-clinicos-mostrar").append("<p class=\"col-9\" id=\"p-top" + indice + "\">" + antecedentes[indice].fecha + "</p>");
         $("#row-clinicos-mostrar").append("<button type=\"button\" class=\"btn col-3\" id=\"botonEliminar\"><span class=\"material-icons-outlined\">delete</span>");
@@ -61,11 +61,41 @@ $("#editarButton").on('click', function (event) {
         $("#antecedentes-clinicos-mostrar").hide();
         $("#antecedentes-clinicos-editar-mostrar").show();
         $("#formulario").show();
+        $("#contenidos-antecedentes" + 0).remove();
+        $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes" + 0 + "\" class=\"row\"></div>");
+        $("#contenidos-antecedentes" + 0).append("<i class=\"shape51 col-3\"></i>");
+        $("#contenidos-antecedentes" + 0).append("<li class=\"me-4 col-3\">Estatura</li>");
+        $("#contenidos-antecedentes" + 0).append("<textarea class=\"me-4 col-3\" id=\"estatura\">" + persona.estatura + "</textarea>");
+        $("#contenidos-antecedentes" + 1).remove();
+        $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes" + 1 + "\" class=\"row\"></div>");
+        $("#contenidos-antecedentes" + 1).append("<i class=\"shape51 col-3\"></i>");
+        $("#contenidos-antecedentes" + 1).append("<li class=\"me-4 col-3\">Peso</li>");
+        $("#contenidos-antecedentes" + 1).append("<textarea class=\"me-4 col-3\" id=\"peso\">" + persona.peso + "</textarea>");
+        $("#contenidos-antecedentes" + 2).remove();
+        $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes" + 2 + "\" class=\"row\"></div>");
+        $("#contenidos-antecedentes" + 2).append("<i class=\"shape51 col-3\"></i>");
+        $("#contenidos-antecedentes" + 2).append("<li class=\"me-4 col-3\">Frecuencia cardiaca</li>");
+        $("#contenidos-antecedentes" + 2).append("<textarea class=\" ms-3 col-3\" id=\"frecuenciaCardiaca\">" + persona.frecuenciaCardiaca + "</textarea>");
     }
     else {
         $("#formulario").hide();
         $("#antecedentes-clinicos-mostrar").show();
         $("#antecedentes-clinicos-editar-mostrar").hide();
+        $("#contenidos-antecedentes" + 0).remove();
+        $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes0\" class=\"row\"></div>");
+        $("#contenidos-antecedentes0").append("<i class=\"shape51 col-3\"></i>");
+        $("#contenidos-antecedentes0").append("<li class=\"me-4 col-3\">Estatura</li>");
+        $("#contenidos-antecedentes0").append("<li class=\"me-4 col-3\" id=\"estatura\">" + persona.estatura + "</li>");
+        $("#contenidos-antecedentes" + 1).remove();
+        $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes1\" class=\"row\"></div>");
+        $("#contenidos-antecedentes1").append("<i class=\"shape51 col-3\"></i>");
+        $("#contenidos-antecedentes1").append("<li class=\"me-4 col-3\">Peso</li>");
+        $("#contenidos-antecedentes1").append("<li class=\"me-4 col-3\" id=\"peso\">" + persona.peso + "</li>");
+        $("#contenidos-antecedentes" + 2).remove();
+        $("#antecedentes-perfil").append("<div id=\"contenidos-antecedentes2\" class=\"row\"></div>");
+        $("#contenidos-antecedentes2").append("<i class=\"shape51 col-3\"></i>");
+        $("#contenidos-antecedentes2").append("<li class=\"me-4 col-3\">Frecuencia Cardiaca</li>");
+        $("#contenidos-antecedentes2").append("<li class=\"me-4 col-3\" id=\"frecuencia\">" + persona.frecuenciaCardiaca + "</li>");
     }
 });
 $("#regiones").on('change', function (event) {
@@ -105,60 +135,23 @@ function ValidarRut(valor) {
 $("#enviarFormulario").on('click', function (event) {
     var aux;
     var formularioFinal = true, formulario = false;
-    (function () {
-        var nombreCompleto = document.getElementById("nombrecompleto");
-        var telefono = document.getElementById("telefono");
-        var rut = document.getElementById("rut");
-        var email = document.getElementById("email");
-        telefono.maxLength = "9";
-        rut.pattern = "^[0-9]{8}-[0-9Kk]{1}$";
-        var campos = document.getElementById("campos");
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation');
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    if (nombreCompleto.value == "") {
-                        campos.children[0].getElementsByClassName("invalid-feedback")[0].innerHTML = "Campo requerido";
-                    }
-                    if (rut.value == "") {
-                        campos.children[1].getElementsByClassName("invalid-feedback")[0].innerHTML = "Campo requerido";
-                    }
-                    if (ValidarRut(rut.value) > 1) {
-                        campos.children[1].getElementsByClassName("invalid-feedback")[0].innerHTML = "Rut no válido";
-                    }
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                else {
-                    form.style.display = "none";
-                    var mensaje = document.getElementById("mensaje");
-                    mensaje.style.display = "block";
-                }
-                event.preventDefault();
-                event.stopPropagation();
-                form.classList.add('was-validated');
-            }, false);
-        });
+    $("#formulario input").each(function () {
+        var _a, _b, _c, _d, _e;
+        var valor = $(this);
+        if (!checkFormulario($(this))) {
+            formularioFinal = false;
+        }
+        switch (valor.attr("id")) {
+            case "nombreCompleto": aux.nombreCompleto = valor.val();
+            case "edad": aux.edad = (_a = valor.val()) === null || _a === void 0 ? void 0 : _a.toString();
+            case "nacimiento": aux.nacimiento = (_b = valor.val()) === null || _b === void 0 ? void 0 : _b.toString();
+            case "correo": aux.correo = (_c = valor.val()) === null || _c === void 0 ? void 0 : _c.toString();
+            case "numeroTel": aux.correo = (_d = valor.val()) === null || _d === void 0 ? void 0 : _d.toString();
+            case "rut": aux.rut = (_e = valor.val()) === null || _e === void 0 ? void 0 : _e.toString();
+        }
     });
-    // $("#formulario input").each(function(){
-    //     let valor = $(this);
-    //     if (!checkFormulario($(this))){
-    //         formularioFinal=false;
-    //     }
-    //     switch (valor.attr("id")){
-    //         case "nombreCompleto":aux.nombreCompleto= valor.val();
-    //         case "edad": aux.edad = valor.val()?.toString();
-    //         case "nacimiento": aux.nacimiento = valor.val()?.toString();
-    //         case "correo": aux.correo = valor.val()?.toString();
-    //         case "numeroTel": aux.correo = valor.val()?.toString();
-    //         case "rut": aux.rut = valor.val()?.toString();
-    //     }
-    // });
-    // if (formularioFinal == true){
-    //     $("#formulario").hide();
-    //     aux = persona;
-    // }
+    if (formularioFinal == true) {
+        $("#formulario").hide();
+        aux = persona;
+    }
 });
