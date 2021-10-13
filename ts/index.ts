@@ -134,6 +134,8 @@ $("#editarButton").on('click',function(event:any){
         $(`#contenidos-antecedentes2`).append(`<i class="shape51 col-3"></i>`);
         $(`#contenidos-antecedentes2`).append(`<li class="me-4 col-3">Frecuencia Cardiaca</li>`);
         $(`#contenidos-antecedentes2`).append(`<li class="me-4 col-3" id="frecuencia">${persona.frecuenciaCardiaca}</li>`);
+
+        
     }
 });
 
@@ -181,7 +183,7 @@ $("#enviarFormulario").on('click',function(event:any){
     
     let aux:Persona;
     let formularioFinal:boolean = true, formulario:boolean = false;
-    
+    event.preventDefault();
     $("#formulario input").each(function(){
         let valor = $(this);
         if (!checkFormulario($(this))){

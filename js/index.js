@@ -135,6 +135,7 @@ function ValidarRut(valor) {
 $("#enviarFormulario").on('click', function (event) {
     var aux;
     var formularioFinal = true, formulario = false;
+    event.preventDefault();
     $("#formulario input").each(function () {
         var _a, _b, _c, _d, _e;
         var valor = $(this);
